@@ -2,7 +2,7 @@ from openai import OpenAI
 from youtube_transcript_api import YouTubeTranscriptApi
 
 client = OpenAI()
-url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+url = 'https://www.youtube.com/watch?v=Zjp_zwyca4Q'
 video_id = url.replace('https://www.youtube.com/watch?v=', '')
 transcript = YouTubeTranscriptApi.get_transcript(video_id)
 
@@ -17,7 +17,7 @@ completion = client.chat.completions.create(
         {"role": "system", "content": "You are a helpful assistant."},
         {
             "role": "user",
-            "content": f"Without telling me the song can you tell me some positives about it?: {ans}"
+            "content": f"Summarize this video: {ans}"
         }
     ]
 )
