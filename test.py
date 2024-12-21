@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from openai import OpenAI
 from youtube_transcript_api import YouTubeTranscriptApi
+import requests
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 CORS(app)
@@ -38,6 +40,27 @@ def summarize():
         summary = completion.choices[0].message.content
 
         return jsonify({"summary": summary})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/get_video_title', methods=['POST'])
+def get_video_title():
+    # Get the YouTube URL from the request
+    data = request.get_json()
+    video_url = data.get('url')
+
+    if not video_url:
+        return jsonify({"error": "URL is required"}), 400
+
+    try:
+        # Send a GET request to the YouTube URL
+        response = requests.get(video_url)
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # Extract the title from the <title> tag
+        title = soup.find("title").text
+        return jsonify({"title": title})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
