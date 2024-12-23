@@ -89,10 +89,10 @@
                 }
 
                 const data = await response.json();
-                
+
                 container.style.width = '1000px';
                 summaryDiv.style.display = 'block';
-                summaryDiv.innerText = data.summary;
+                summaryDiv.innerHTML = `<h2>${data.title}</h2><p>${data.summary}</p>`;
             } catch (error) {
                 summaryDiv.style.display = 'block';
                 summaryDiv.innerText = 'Error: ' + error.message;
