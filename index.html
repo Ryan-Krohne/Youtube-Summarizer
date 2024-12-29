@@ -93,7 +93,10 @@
 
                 container.style.width = '1000px';
                 summaryDiv.style.display = 'block';
-                summaryDiv.innerHTML = `<h2>${data.title}</h2><p>${data.summary}</p>`;
+                summaryDiv.innerHTML = `
+                    <h2 style="font-size: 28px; font-weight: bold; text-align: center;">${data.title}</h2>
+                     <p>${data.summary}</p>
+                `;
             } catch (error) {
                 summaryDiv.style.display = 'block';
                 summaryDiv.innerText = 'Error: ' + error.message;
