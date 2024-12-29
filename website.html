@@ -76,7 +76,8 @@
             const youtubeLink = document.getElementById('youtubeLink').value;
 
             try {
-                const response = await fetch('http://127.0.0.1:5000/summarize', {
+                // Change the URL to your deployed Render backend
+                const response = await fetch('https://renderbackend-8hhs.onrender.com/summarize', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
