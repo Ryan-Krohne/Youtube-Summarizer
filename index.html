@@ -25,6 +25,7 @@
             max-width: 90%;
             overflow: hidden;
             transition: width 0.5s ease;
+            box-sizing: border-box;
         }
         input[type="url"] {
             width: 100%;
@@ -32,6 +33,7 @@
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
+            box-sizing: border-box;
         }
         button {
             padding: 10px 20px;
@@ -60,7 +62,7 @@
     <div class="container" id="container">
         <h1>YouTube Video Summarizer</h1>
         <form id="summarizerForm">
-            <input type="url" id="youtubeLink" placeholder="Enter YouTube Link" required style="padding-right: 0px !important;">
+            <input type="url" id="youtubeLink" placeholder="Enter YouTube Link" required>
             <button type="submit">Get Summary</button>
         </form>
         <div id="summary" class="summary" style="display: none;"></div>
