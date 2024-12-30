@@ -93,15 +93,20 @@
 
                 container.style.width = '1000px';
                 summaryDiv.style.display = 'block';
+        
+                // Replace newline characters with <br> tags to preserve line breaks
+                const formattedSummary = data.summary.replace(/\n/g, '<br>');
+        
                 summaryDiv.innerHTML = `
                     <h2 style="font-size: 28px; font-weight: bold; text-align: center;">${data.title}</h2>
-                     <p>${data.summary}</p>
+                    <p>${formattedSummary}</p>
                 `;
             } catch (error) {
                 summaryDiv.style.display = 'block';
                 summaryDiv.innerText = 'Error: ' + error.message;
             }
         });
+        
     </script>
 </body>
 </html>
