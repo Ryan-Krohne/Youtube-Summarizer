@@ -86,10 +86,12 @@
         const form = document.getElementById('summarizerForm');
         const summaryDiv = document.getElementById('summary');
         const container = document.getElementById('container');
-
+        const button = form.querySelector('button');
+    
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const youtubeLink = document.getElementById('youtubeLink').value;
+            button.textContent = 'Getting Summary...';
 
             try {
                 const response = await fetch('https://renderbackend-8hhs.onrender.com/summarize', {
@@ -125,6 +127,8 @@
             } catch (error) {
                 summaryDiv.style.display = 'block';
                 summaryDiv.innerText = 'Error: ' + error.message;
+            } finally {
+                button.textContent = 'Summarize Another Video';
             }
         });        
     </script>
