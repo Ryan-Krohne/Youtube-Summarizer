@@ -28,6 +28,7 @@ input[type="url"] {
     border-radius: 4px;
     box-sizing: border-box;
     transition: border-color 0.3s ease;
+    text-align: center;
 }
 input[type="url"]:focus {
     border-color: #007BFF;
@@ -68,5 +69,29 @@ button:hover {
 }
 .section h3 {
     font-size: 22px;
+    margin-bottom: 10px;
+}
+
+
+#descriptionSection, #chronologicalSummarySection {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#descriptionSection p, #chronologicalSummarySection p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+}
+
+#descriptionSection h3, #chronologicalSummarySection h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #222;
     margin-bottom: 10px;
 }
