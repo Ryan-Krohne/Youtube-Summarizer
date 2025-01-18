@@ -11,7 +11,7 @@ form.addEventListener('submit', async (e) => {
     button.textContent = 'Getting Summary...';
 
     try {
-        const response = await fetch('https://renderbackend-8hhs.onrender.com/summarize', {
+        const response = await fetch('https://renderbackend-xfh6.onrender.com/summarize', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
