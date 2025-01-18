@@ -9,6 +9,11 @@ body {
     background-color: #f4f4f4;
     text-align: center;
 }
+
+body.dark-mode {
+    background-color: rgb(26, 26, 26);
+}
+
 .container {
     background: #fff;
     padding: 20px;
@@ -20,6 +25,32 @@ body {
     transition: all 0.5s ease-in-out;
     box-sizing: border-box;
 }
+
+.container.dark-mode{
+    background: #2e2e2e;
+}
+.container.dark-mode h1 {
+    color: #acacac;
+}
+.container.dark-mode h1 {
+    color: #9d9d9d;
+}
+.container.dark-mode input[type="url"] {
+
+    background-color: #404040;
+    border: 1px solid #444444;
+}
+
+.container.dark-mode button {
+    background-color: #333333;
+    color: #acacac;
+    border: 1px solid #444444;
+}
+.container.dark-mode button:hover {
+    background-color: #555555;
+}
+
+
 input[type="url"] {
     width: 100%;
     padding: 10px;

@@ -1,3 +1,21 @@
+function applyThemeBasedOnTime() {
+    const hour = new Date().getHours();
+    const isDayTime = hour >= 6 && hour < 18;
+
+    document.body.classList.toggle('dark-mode', !isDayTime);
+
+    const container = document.querySelector('.container');
+    if (container) {
+        container.classList.toggle('dark-mode', !isDayTime);
+    }
+
+    console.log(`Current hour: ${hour}`);
+    console.log(`Is it daytime? ${isDayTime}`);
+    console.log(`Dark mode applied to container: ${container?.classList.contains('dark-mode')}`);
+}
+
+applyThemeBasedOnTime();
+
 const form = document.getElementById('summarizerForm');
 const summaryDiv = document.getElementById('summary');
 const descriptionSection = document.getElementById('descriptionSection');
