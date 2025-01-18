@@ -50,6 +50,27 @@ body.dark-mode {
     background-color: #555555;
 }
 
+.container.dark-mode #descriptionSection {
+    background-color: #333333; /* Dark background */
+    color: #ffffff; /* White text */
+}
+
+.container.dark-mode #chronologicalSummarySection {
+    background-color: #333333; /* Dark background */
+    color: #ffffff; /* White text */
+}
+
+
+.container.dark-mode #summary {
+    background-color: #333333;
+}
+.container.dark-mode #summary p {
+    color: #949494;
+}
+.container.dark-mode #summary h3 {
+    color: #acacac;
+
+}
 
 input[type="url"] {
     width: 100%;
