@@ -23,7 +23,7 @@ body.dark-mode {
 }
 
 .container {
-    width: 70%; /* Ensures responsiveness on smaller screens */
+    width: 30%; /* Ensures responsiveness on smaller screens */
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -56,6 +56,7 @@ input[type="url"] {
     border-radius: 4px;
     outline: none;
     transition: border-color 0.3s;
+    text-align: center;
 }
 
 input[type="url"]:focus {
