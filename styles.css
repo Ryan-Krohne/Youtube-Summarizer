@@ -10,6 +10,11 @@ body {
     color: #333;
     background-color: #f9f9f9;
     transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
 body.dark-mode {
@@ -18,8 +23,7 @@ body.dark-mode {
 }
 
 .container {
-    max-width: 600px;
-    margin: 50px auto;
+    width: 70%; /* Ensures responsiveness on smaller screens */
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
