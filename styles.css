@@ -1,152 +1,123 @@
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-    text-align: center;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 body.dark-mode {
-    background-color: rgb(26, 26, 26);
+    background-color: #121212;
+    color: #f0f0f0;
 }
 
 .container {
-    background: #fff;
+    max-width: 600px;
+    margin: 50px auto;
     padding: 20px;
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    max-width: 90%;
-    overflow: hidden;
-    transition: all 0.5s ease-in-out;
-    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
 }
 
-.container.dark-mode{
-    background: #2e2e2e;
-}
-.container.dark-mode h1 {
-    color: #acacac;
-}
-.container.dark-mode h1 {
-    color: #9d9d9d;
-}
-.container.dark-mode input[type="url"] {
-
-    background-color: #404040;
-    border: 1px solid #444444;
+.container.dark-mode {
+    background-color: #1e1e1e;
 }
 
-.container.dark-mode button {
-    background-color: #333333;
-    color: #acacac;
-    border: 1px solid #444444;
-}
-.container.dark-mode input[type="url"] {
-    color: #acacac;
-  }
-.container.dark-mode button:hover {
-    background-color: #555555;
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 2rem;
 }
 
-.container.dark-mode #descriptionSection {
-    background-color: #333333; /* Dark background */
-    color: #ffffff; /* White text */
-}
-
-.container.dark-mode #chronologicalSummarySection {
-    background-color: #333333; /* Dark background */
-    color: #ffffff; /* White text */
-}
-
-
-.container.dark-mode #summary {
-    background-color: #333333;
-}
-.container.dark-mode #summary p {
-    color: #949494;
-}
-.container.dark-mode #summary h3 {
-    color: #acacac;
-
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 input[type="url"] {
-    width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-    text-align: center;
-}
-input[type="url"]:focus {
-    border-color: #007BFF;
     outline: none;
+    transition: border-color 0.3s;
 }
+
+input[type="url"]:focus {
+    border-color: #007bff;
+}
+
 button {
     padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s;
 }
+
 button:hover {
     background-color: #0056b3;
-    transform: scale(1.05);
 }
+
+button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
 .summary {
-    margin-top: 20px;
-    text-align: left;
-    background: #f9f9f9;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    max-height: 300px;
-    overflow-y: auto;
     display: none;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+    margin-top: 20px;
 }
+
 .summary.show {
-    opacity: 1;
     display: block;
 }
+
 .section {
     margin-bottom: 20px;
 }
+
 .section h3 {
-    font-size: 22px;
+    font-size: 1.25rem;
     margin-bottom: 10px;
+    color: #007bff;
 }
 
-
-#descriptionSection, #chronologicalSummarySection {
-    margin-top: 20px;
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.section p {
+    line-height: 1.5;
 }
 
-#descriptionSection p, #chronologicalSummarySection p {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    line-height: 1.8;
-    color: #555;
+iframe {
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
 }
 
-#descriptionSection h3, #chronologicalSummarySection h3 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-    color: #222;
-    margin-bottom: 10px;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
 }
