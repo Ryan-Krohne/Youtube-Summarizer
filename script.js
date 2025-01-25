@@ -19,7 +19,7 @@ applyThemeBasedOnTime();
 const form = document.getElementById('summarizerForm');
 const summaryDiv = document.getElementById('summary');
 const descriptionSection = document.getElementById('descriptionSection');
-const chronologicalSummarySection = document.getElementById('chronologicalSummarySection');
+const keyPointsSection = document.getElementById('keyPointsSection');
 const container = document.getElementById('container');
 const button = form.querySelector('button');
 
@@ -49,8 +49,8 @@ form.addEventListener('submit', async (e) => {
         let formattedDescription = data.description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         formattedDescription = formattedDescription.replace(/\n/g, '<br>');
 
-        let formattedChronologicalSummary = data.chronological_summary.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        formattedChronologicalSummary = formattedChronologicalSummary.replace(/\n/g, '<br>');
+        let formattedKeyPoints = data.key_points.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        formattedKeyPoints = formattedKeyPoints.replace(/\n/g, '<br>');
 
         const videoId = youtubeLink.split('v=')[1]?.split('&')[0];
 
@@ -67,9 +67,9 @@ form.addEventListener('submit', async (e) => {
             `;
         }
 
-        chronologicalSummarySection.innerHTML = `
-            <h3>Chronological Summary</h3>
-            <p>${formattedChronologicalSummary}</p>
+        keyPointsSection.innerHTML = `
+            <h3>Key Points</h3>
+            <p>${formattedKeyPoints}</p>
         `;
     } catch (error) {
         summaryDiv.style.display = 'block';
