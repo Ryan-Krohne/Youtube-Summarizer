@@ -23,12 +23,14 @@ body.dark-mode {
 }
 
 .container {
-    width: 30%; /* Ensures responsiveness on smaller screens */
+    width: 90%;
+    max-width: 500px;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s;
+    margin: 10px;
 }
 
 .container.dark-mode {
