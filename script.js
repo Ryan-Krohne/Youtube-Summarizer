@@ -43,7 +43,9 @@ form.addEventListener('submit', async (e) => {
 
         const data = await response.json();
 
-        container.style.width = '1000px';
+        container.style.width = '100%';
+        container.style.maxWidth = "800px";
+
         summaryDiv.classList.add('show');
 
         let formattedDescription = data.description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
