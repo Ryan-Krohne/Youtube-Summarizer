@@ -55,22 +55,27 @@ form.addEventListener('submit', async (e) => {
         formattedKeyPoints = formattedKeyPoints.replace(/\n/g, '<br>');
 
         const videoId = youtubeLink.split('v=')[1]?.split('&')[0];
+        
+        // Add the title to the top of the summary div
+        const titleElement = document.createElement('h2');
+        titleElement.textContent = data.title;
+        titleElement.classList.add('video-title');
+        summaryDiv.insertBefore(titleElement, summaryDiv.firstChild);
+
 
         descriptionSection.innerHTML = `
-            <h3>Description</h3>
             <p>${formattedDescription}</p>
         `;
 
         if (videoId) {
             const videoEmbedUrl = `https://www.youtube.com/embed/${videoId}`;
             descriptionSection.innerHTML += `
-                <h3>Video</h3>
                 <iframe width="100%" height="315" src="${videoEmbedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             `;
         }
 
         keyPointsSection.innerHTML = `
-            <h3>Key Points</h3>
+            <h2>Key Points</h2>
             <p>${formattedKeyPoints}</p>
         `;
     } catch (error) {
