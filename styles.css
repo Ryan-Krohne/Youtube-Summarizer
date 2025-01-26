@@ -32,6 +32,13 @@ body.dark-mode {
     transition: background-color 0.3s;
     margin: 10px;
 }
+#summary h3{
+    text-align: center;
+}
+
+#summary h2{
+    text-align: center;
+}
 
 .container.dark-mode {
     background-color: #1e1e1e;
