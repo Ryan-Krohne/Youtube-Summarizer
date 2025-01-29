@@ -36,6 +36,17 @@ body.dark-mode {
     text-align: center;
 }
 
+.icon-container {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
 #summary h2{
     text-align: center;
 }

@@ -16,6 +16,43 @@ function applyThemeBasedOnTime() {
 
 applyThemeBasedOnTime();
 
+document.addEventListener('DOMContentLoaded', () => {
+    const iconContainer = document.createElement('div');
+    iconContainer.classList.add('icon-container');
+
+    iconContainer.innerHTML = `
+        <i data-lucide="moon"></i>
+        <i data-lucide="sun"></i>
+    `;
+
+    document.body.appendChild(iconContainer);
+
+    lucide.createIcons();
+
+    // Toggle dark mode when the moon icon is clicked
+    const moonIcon = document.querySelector('[data-lucide="moon"]');
+    moonIcon.addEventListener('click', () => {
+        document.body.classList.add('dark-mode');
+        const container = document.querySelector('.container');
+        if (container) {
+            container.classList.add('dark-mode');
+        }
+        console.log('Dark mode activated!');
+    });
+
+    // Toggle light mode when the sun icon is clicked
+    const sunIcon = document.querySelector('[data-lucide="sun"]');
+    sunIcon.addEventListener('click', () => {
+        document.body.classList.remove('dark-mode');
+        const container = document.querySelector('.container');
+        if (container) {
+            container.classList.remove('dark-mode');
+        }
+        console.log('Light mode activated!');
+    });
+  });
+
+
 const form = document.getElementById('summarizerForm');
 const summaryDiv = document.getElementById('summary');
 const descriptionSection = document.getElementById('descriptionSection');
