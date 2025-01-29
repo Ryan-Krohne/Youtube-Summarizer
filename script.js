@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         console.log('Light mode activated!');
     });
-  });
+});
 
 
 const form = document.getElementById('summarizerForm');
@@ -93,12 +93,15 @@ form.addEventListener('submit', async (e) => {
 
         const videoId = youtubeLink.split('v=')[1]?.split('&')[0];
         
-        // Add the title to the top of the summary div
+        const existingTitle = summaryDiv.querySelector('.video-title');
+        if (existingTitle) {
+            existingTitle.remove();
+        }
+
         const titleElement = document.createElement('h2');
         titleElement.textContent = data.title;
         titleElement.classList.add('video-title');
         summaryDiv.insertBefore(titleElement, summaryDiv.firstChild);
-
 
         descriptionSection.innerHTML = `
             <p>${formattedDescription}</p>
