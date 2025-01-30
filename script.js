@@ -66,7 +66,7 @@ form.addEventListener('submit', async (e) => {
     button.textContent = 'Getting Summary...';
 
     try {
-        const response = await fetch('https://renderbackend-xfh6.onrender.com/summarize', {
+        const response = await fetch('https://renderbackend-xfh6.onrender.com/testing', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -82,6 +82,11 @@ form.addEventListener('submit', async (e) => {
 
         container.style.width = '100%';
         container.style.maxWidth = "800px";
+
+        const header = document.querySelector('.container h1');
+        if (header) {
+            header.style.marginTop = '20px';
+        }
 
         summaryDiv.classList.add('show');
 
