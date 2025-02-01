@@ -65,6 +65,11 @@ form.addEventListener('submit', async (e) => {
     const youtubeLink = document.getElementById('youtubeLink').value;
     button.textContent = 'Getting Summary...';
 
+    const errorMessage = summaryDiv.querySelector('.error-message');
+    if (errorMessage) {
+        errorMessage.remove();
+    }
+    
     try {
         const response = await fetch('https://renderbackend-xfh6.onrender.com/summarize', {
             method: 'POST',
@@ -75,7 +80,8 @@ form.addEventListener('submit', async (e) => {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to fetch the summary');
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to fetch the summary');
         }
 
         const data = await response.json();
@@ -124,8 +130,31 @@ form.addEventListener('submit', async (e) => {
             <p>${formattedKeyPoints}</p>
         `;
     } catch (error) {
+
+        const titleElement = summaryDiv.querySelector('.video-title');
+        if (titleElement) {
+            titleElement.textContent = '';  // Clear the title content without deleting the element
+        }
+
+        const descriptionElement = document.getElementById('descriptionSection');
+        if (descriptionElement) {
+            descriptionElement.innerHTML = '';  // Clear description content
+        }
+
+        const keyPointsElement = document.getElementById('keyPointsSection');
+        if (keyPointsElement) {
+            keyPointsElement.innerHTML = '';  // Clear key points content
+        }
+        
+        const errorMessageElement = document.createElement('div');
+        errorMessageElement.classList.add('error-message');
+
+        // Set the error message text
+        errorMessageElement.innerText = 'Error: ' + error.message;
+
+        // Insert the error message into summaryDiv
         summaryDiv.style.display = 'block';
-        summaryDiv.innerText = 'Error: ' + error.message;
+        summaryDiv.appendChild(errorMessageElement);
     } finally {
         button.textContent = 'Summarize Another Video';
     }
