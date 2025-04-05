@@ -69,9 +69,9 @@ form.addEventListener('submit', async (e) => {
     if (errorMessage) {
         errorMessage.remove();
     }
-    
+
     try {
-        const response = await fetch('https://renderbackend-xfh6.onrender.com/summarize', {
+        const response = await fetch('http://127.0.0.1:5000/summarize', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -129,6 +129,31 @@ form.addEventListener('submit', async (e) => {
             <h2>Key Points</h2>
             <p>${formattedKeyPoints}</p>
         `;
+
+        // --- FAQ Section ---
+        if (data.faqs && typeof data.faqs === 'object' && Object.keys(data.faqs).length > 0) {
+            console.log(data.faqs)
+            const faqSection = document.createElement('div');
+            faqSection.id = 'faqSection';
+            faqSection.innerHTML = '<h2>Related Questions</h2>';
+
+            for (const key in data.faqs) {
+                if (data.faqs.hasOwnProperty(key)) {
+                    const value = data.faqs[key];
+                    const questionElement = document.createElement('strong');
+                    questionElement.textContent = key;
+                    const answerElement = document.createElement('p');
+                    answerElement.textContent = value;
+                    const breakElement = document.createElement('br');
+
+                    faqSection.appendChild(questionElement);
+                    faqSection.appendChild(answerElement);
+                    faqSection.appendChild(breakElement);
+                }
+            }
+            summaryDiv.appendChild(faqSection); // Append the FAQ section to the summaryDiv
+        }
+
     } catch (error) {
 
         const titleElement = summaryDiv.querySelector('.video-title');
