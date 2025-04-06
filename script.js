@@ -1,20 +1,21 @@
-function applyThemeBasedOnTime() {
-    const hour = new Date().getHours();
-    const isDayTime = hour >= 6 && hour < 18;
-
-    document.body.classList.toggle('dark-mode', !isDayTime);
-
-    const container = document.querySelector('.container');
-    if (container) {
-        container.classList.toggle('dark-mode', !isDayTime);
+function applyThemeBasedOnPreference() {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark-mode');
+        const container = document.querySelector('.container');
+        if (container) {
+            container.classList.add('dark-mode');
+        }
+    } else {
+        document.body.classList.remove('dark-mode');
+        const container = document.querySelector('.container');
+        if (container) {
+            container.classList.remove('dark-mode');
+        }
     }
 
-    console.log(`Current hour: ${hour}`);
-    console.log(`Is it daytime? ${isDayTime}`);
-    console.log(`Dark mode applied to container: ${container?.classList.contains('dark-mode')}`);
 }
 
-applyThemeBasedOnTime();
+applyThemeBasedOnPreference();
 
 document.addEventListener('DOMContentLoaded', () => {
     const iconContainer = document.createElement('div');
@@ -37,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (container) {
             container.classList.add('dark-mode');
         }
-        console.log('Dark mode activated!');
     });
 
     // Toggle light mode when the sun icon is clicked
@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (container) {
             container.classList.remove('dark-mode');
         }
-        console.log('Light mode activated!');
     });
 });
 
@@ -132,7 +131,6 @@ form.addEventListener('submit', async (e) => {
 
         // --- FAQ Section ---
         if (data.faqs && typeof data.faqs === 'object' && Object.keys(data.faqs).length > 0) {
-            console.log(data.faqs)
             const faqSection = document.createElement('div');
             faqSection.id = 'faqSection';
             faqSection.innerHTML = '<h2>Related Questions</h2>';
