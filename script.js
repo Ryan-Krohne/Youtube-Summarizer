@@ -131,17 +131,27 @@ form.addEventListener('submit', async (e) => {
 
         // --- FAQ Section ---
         if (data.faqs && typeof data.faqs === 'object' && Object.keys(data.faqs).length > 0) {
-            const faqSection = document.createElement('div');
-            faqSection.id = 'faqSection';
+            let faqSection = document.getElementById('faqSection');
+
+            if (!faqSection) {
+                faqSection = document.createElement('div');
+                faqSection.id = 'faqSection';
+                summaryDiv.appendChild(faqSection);
+            }
+
+            // Clear out any existing content
             faqSection.innerHTML = '<h2>Related Questions</h2>';
 
             for (const key in data.faqs) {
                 if (data.faqs.hasOwnProperty(key)) {
                     const value = data.faqs[key];
+
                     const questionElement = document.createElement('strong');
                     questionElement.textContent = key;
+
                     const answerElement = document.createElement('p');
                     answerElement.textContent = value;
+
                     const breakElement = document.createElement('br');
 
                     faqSection.appendChild(questionElement);
@@ -149,8 +159,8 @@ form.addEventListener('submit', async (e) => {
                     faqSection.appendChild(breakElement);
                 }
             }
-            summaryDiv.appendChild(faqSection); // Append the FAQ section to the summaryDiv
         }
+
 
     } catch (error) {
 
