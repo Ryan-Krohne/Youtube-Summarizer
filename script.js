@@ -61,6 +61,11 @@ const button = form.querySelector('button');
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    const contactTextElement = document.getElementById('contactFooter');
+    if (contactTextElement && contactTextElement.style.display !== 'none') {
+        contactTextElement.style.display = 'none';
+    }
     const youtubeLink = document.getElementById('youtubeLink').value;
     button.textContent = 'Getting Summary...';
 
@@ -179,15 +184,23 @@ form.addEventListener('submit', async (e) => {
             keyPointsElement.innerHTML = '';  // Clear key points content
         }
         
+        const faqElement = document.getElementById('faqSection');
+        if (faqElement) {
+            faqElement.innerHTML = '';  // Clear faq content
+        }
+
+        // Add error message to the page
         const errorMessageElement = document.createElement('div');
         errorMessageElement.classList.add('error-message');
-
-        // Set the error message text
-        errorMessageElement.innerText = 'Error: ' + error.message;
+        errorMessageElement.innerText = error.message;
 
         // Insert the error message into summaryDiv
         summaryDiv.style.display = 'block';
         summaryDiv.appendChild(errorMessageElement);
+
+        // Show the "Contact me" footer on error
+        const contactFooter = document.getElementById('contactFooter');
+        contactFooter.style.display = 'block';
     } finally {
         button.textContent = 'Summarize Another Video';
     }
