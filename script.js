@@ -18,14 +18,9 @@ function applyThemeBasedOnPreference() {
 applyThemeBasedOnPreference();
 
 window.toggleAnswer = function(event) {
-    console.log("toggleAnswer function called!");
     const questionDiv = event.currentTarget;
     const answerDiv = questionDiv.nextElementSibling;
     const dropdownArrow = questionDiv.querySelector('.dropdown-arrow');
-
-    console.log("Question Div:", questionDiv);
-    console.log("Answer Div:", answerDiv);
-    console.log("Dropdown Arrow:", dropdownArrow);
 
     if (answerDiv && dropdownArrow) {
         console.log("Current display style:", answerDiv.style.display);
@@ -161,7 +156,7 @@ form.addEventListener('submit', async (e) => {
                     `;
                 }
             }
-            faqHTML += '</div>'; // Close the padding div
+            faqHTML += '</div>';
         }
 
         if (videoId) {
@@ -171,12 +166,11 @@ form.addEventListener('submit', async (e) => {
                 <iframe width="100%" height="315" src="${videoEmbedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             `;
         } else {
-            descriptionHTML += faqHTML; // Add FAQ even if no video ID
+            descriptionHTML += faqHTML;
         }
 
         descriptionSection.innerHTML = descriptionHTML;
 
-        // Re-attach event listeners after setting innerHTML
         const faqQuestions = descriptionSection.querySelectorAll('.faq-question-element');
         faqQuestions.forEach(question => {
             question.addEventListener('click', toggleAnswer);
@@ -191,17 +185,17 @@ form.addEventListener('submit', async (e) => {
 
         const titleElement = summaryDiv.querySelector('.video-title');
         if (titleElement) {
-            titleElement.textContent = '';  // Clear the title content without deleting the element
+            titleElement.textContent = '';
         }
 
         const descriptionElement = document.getElementById('descriptionSection');
         if (descriptionElement) {
-            descriptionElement.innerHTML = '';  // Clear description content
+            descriptionElement.innerHTML = '';
         }
 
         const keyPointsElement = document.getElementById('keyPointsSection');
         if (keyPointsElement) {
-            keyPointsElement.innerHTML = '';  // Clear key points content
+            keyPointsElement.innerHTML = '';
         }
         
         const faqElement = document.getElementById('faqSection');
