@@ -17,6 +17,26 @@ function applyThemeBasedOnPreference() {
 
 applyThemeBasedOnPreference();
 
+window.toggleAnswer = function(event) {
+    console.log("toggleAnswer function called!");
+    const questionDiv = event.currentTarget;
+    const answerDiv = questionDiv.nextElementSibling;
+    const dropdownArrow = questionDiv.querySelector('.dropdown-arrow');
+
+    console.log("Question Div:", questionDiv);
+    console.log("Answer Div:", answerDiv);
+    console.log("Dropdown Arrow:", dropdownArrow);
+
+    if (answerDiv && dropdownArrow) {
+        console.log("Current display style:", answerDiv.style.display);
+        answerDiv.style.display = answerDiv.style.display === 'none' ? 'block' : 'none';
+        dropdownArrow.textContent = answerDiv.style.display === 'none' ? '▼' : '▲';
+        console.log("New display style:", answerDiv.style.display);
+    } else {
+        console.log("Answer Div or Dropdown Arrow not found!");
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     const iconContainer = document.createElement('div');
     iconContainer.classList.add('icon-container');
@@ -118,54 +138,54 @@ form.addEventListener('submit', async (e) => {
         titleElement.classList.add('video-title');
         summaryDiv.insertBefore(titleElement, summaryDiv.firstChild);
 
-        descriptionSection.innerHTML = `
-            <p>${formattedDescription}</p>
-        `;
+        let descriptionHTML = `<p>${formattedDescription}</p>`;
+        let faqHTML = '';
+
+        // --- FAQ Section with Dropdown (Goes Above Iframe Inside Description) ---
+        if (data.faqs && typeof data.faqs === 'object' && Object.keys(data.faqs).length > 0) {
+            faqHTML += '<div class="faq-container" style="padding-top: 20px;">';
+            faqHTML += '<h2>Related Questions</h2>';
+            for (const key in data.faqs) {
+                if (data.faqs.hasOwnProperty(key)) {
+                    const value = data.faqs[key];
+
+                    faqHTML += `
+                        <div class="faq-item" style="cursor: pointer;">
+                            <div class="faq-question faq-question-element" style="display: flex; justify-content: space-between; align-items: center;">
+                                <strong>${key}</strong> <span class="dropdown-arrow">▼</span>
+                            </div>
+                            <div class="faq-answer" style="display: none; margin-top: 5px;">
+                                <p>${value}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            faqHTML += '</div>'; // Close the padding div
+        }
 
         if (videoId) {
-            const videoEmbedUrl = `https://www.youtube.com/embed/${videoId}`;
-            descriptionSection.innerHTML += `
+            const videoEmbedUrl = `http://www.youtube.com/embed/${videoId}`;
+            descriptionHTML += `
+                ${faqHTML}
                 <iframe width="100%" height="315" src="${videoEmbedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             `;
+        } else {
+            descriptionHTML += faqHTML; // Add FAQ even if no video ID
         }
+
+        descriptionSection.innerHTML = descriptionHTML;
+
+        // Re-attach event listeners after setting innerHTML
+        const faqQuestions = descriptionSection.querySelectorAll('.faq-question-element');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', toggleAnswer);
+        });
 
         keyPointsSection.innerHTML = `
             <h2>Key Points</h2>
             <p>${formattedKeyPoints}</p>
         `;
-
-        // --- FAQ Section ---
-        if (data.faqs && typeof data.faqs === 'object' && Object.keys(data.faqs).length > 0) {
-            let faqSection = document.getElementById('faqSection');
-
-            if (!faqSection) {
-                faqSection = document.createElement('div');
-                faqSection.id = 'faqSection';
-                summaryDiv.appendChild(faqSection);
-            }
-
-            // Clear out any existing content
-            faqSection.innerHTML = '<h2>Related Questions</h2>';
-
-            for (const key in data.faqs) {
-                if (data.faqs.hasOwnProperty(key)) {
-                    const value = data.faqs[key];
-
-                    const questionElement = document.createElement('strong');
-                    questionElement.textContent = key;
-
-                    const answerElement = document.createElement('p');
-                    answerElement.textContent = value;
-
-                    const breakElement = document.createElement('br');
-
-                    faqSection.appendChild(questionElement);
-                    faqSection.appendChild(answerElement);
-                    faqSection.appendChild(breakElement);
-                }
-            }
-        }
-
 
     } catch (error) {
 
