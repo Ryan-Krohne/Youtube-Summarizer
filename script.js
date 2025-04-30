@@ -66,6 +66,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+window.addEventListener('DOMContentLoaded', () => {
+  const hasSeenTour = localStorage.getItem('hasSeenTour');
+
+  if (!hasSeenTour) {
+    introJs()
+      .setOptions({
+        steps: [
+          {
+            element: document.querySelector('#youtubeLink'),
+            intro: 'Paste a YouTube video link here to get started.',
+            position: 'top'
+          },
+          {
+            element: document.querySelector('button[type="submit"]'),
+            intro: 'Click here to fetch and view the summary.'
+          }
+        ],
+        showProgress: true,
+        showBullets: true,
+        nextLabel: 'Next →',
+        prevLabel: '← Back',
+        doneLabel: 'Finish'
+      })
+      .oncomplete(() => {
+        localStorage.setItem('hasSeenTour', 'true');
+      })
+      .onexit(() => {
+        localStorage.setItem('hasSeenTour', 'true');
+      })
+      .start();
+  }
+});
+
+
+
 
 const form = document.getElementById('summarizerForm');
 const summaryDiv = document.getElementById('summary');
@@ -90,7 +125,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch('https://renderbackend-xfh6.onrender.com/summarize', {
+        const response = await fetch('https://renderbackend-xfh6.onrender.com/testing', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

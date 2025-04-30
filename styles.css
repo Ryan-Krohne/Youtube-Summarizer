@@ -146,3 +146,55 @@ iframe {
         font-size: 0.9rem;
     }
 }
+
+/* Default (light mode) customizations */
+.introjs-tooltip {
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.introjs-tooltipbuttons button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.introjs-progressbar {
+    background-color: #007bff;
+}
+
+/* Dark mode customizations */
+@media (prefers-color-scheme: dark) {
+    .introjs-tooltip {
+        background-color: #1e1e1e;
+        color: #ffffff;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .introjs-tooltipbuttons button {
+        background-color: #4e8ef7;
+        color: #fff;
+    }
+
+    .introjs-progressbar {
+        background-color: #4e8ef7;
+    }
+}
+
+/* Light mode background */
+body:not(.dark-mode) .introjs-overlay {
+    opacity: 0.4;
+    background-color: rgb(0, 0, 0) !important;
+    outline: none !important;
+}
+
+/* Dark mode background */
+body.dark-mode .introjs-overlay {
+    opacity: 0.7;
+    background-color: rgb(0, 0, 0) !important;
+    /* Red for dark mode */
+}

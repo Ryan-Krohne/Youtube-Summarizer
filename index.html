@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube Summarizer</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="node_modules/intro.js/minified/introjs.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/Youtube-Summarizer/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/Youtube-Summarizer/favicon-32x32.png">
@@ -13,10 +14,10 @@
 
 </head>
 <body>
-    <div class="container" id="container">
+    <div class="container" id="container"> 
         <h1>YouTube Summarizer</h1>
         <form id="summarizerForm">
-            <input type="url" id="youtubeLink" placeholder="Enter YouTube Link" required>
+            <input type="url" id="youtubeLink" placeholder="Enter a Youtube URL" required>
             <button type="submit">Get Summary</button>
         </form>
         <div id="summary" class="summary">
@@ -29,6 +30,7 @@
             Something went wrong? Let me know.
         </a>
     </div>
+    <script src="node_modules/intro.js/minified/intro.min.js"></script>
     <script src="script.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 </body>
