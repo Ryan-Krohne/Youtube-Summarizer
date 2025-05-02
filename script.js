@@ -195,7 +195,7 @@ form.addEventListener('submit', async (e) => {
         }
 
         if (videoId) {
-            const videoEmbedUrl = `http://www.youtube.com/embed/${videoId}`;
+            const videoEmbedUrl = `https://www.youtube.com/embed/${videoId}`;
             descriptionHTML += `
                 ${faqHTML}
                 <iframe width="100%" height="315" src="${videoEmbedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
