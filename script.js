@@ -75,12 +75,12 @@ window.addEventListener('DOMContentLoaded', () => {
         steps: [
           {
             element: document.querySelector('#youtubeLink'),
-            intro: 'Paste a YouTube video link here to get started.',
+            intro: 'Start here! Paste the link to any YouTube video you want summarized.',
             position: 'top'
           },
           {
             element: document.querySelector('button[type="submit"]'),
-            intro: 'Click here to fetch and view the summary.'
+            intro: 'Click this button to fetch the summary and key points from the video.'
           }
         ],
         showProgress: true,

@@ -198,3 +198,8 @@ body.dark-mode .introjs-overlay {
     background-color: rgb(0, 0, 0) !important;
     /* Red for dark mode */
 }
+
+.introjs-tooltiptext {
+    color: #000 !important;
+    /* or whatever color contrasts your tooltip background */
+}
