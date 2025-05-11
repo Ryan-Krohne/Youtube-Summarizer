@@ -126,7 +126,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch('https://renderbackend-xfh6.onrender.com/testing', {
+        const response = await fetch('https://renderbackend-xfh6.onrender.com/summarize', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
