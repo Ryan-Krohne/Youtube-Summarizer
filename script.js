@@ -80,7 +80,8 @@ window.addEventListener('DOMContentLoaded', () => {
           },
           {
             element: document.querySelector('button[type="submit"]'),
-            intro: 'Click this button to fetch the summary and key points from the video.'
+            intro: 'Click this button to fetch the summary and key points from the video.',
+            position: 'top'
           }
         ],
         showProgress: true,
@@ -125,7 +126,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch('https://renderbackend-xfh6.onrender.com/summarize', {
+        const response = await fetch('https://renderbackend-xfh6.onrender.com/testing', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
