@@ -158,6 +158,12 @@ form.addEventListener('submit', async (e) => {
         formattedKeyPoints = formattedKeyPoints.replace(/\n/g, '<br>');
 
         const videoId = youtubeLink.split('v=')[1]?.split('&')[0];
+
+        if (videoId) {
+            const newUrl = `/summary/${videoId}`;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+        }
+        
         
         const existingTitle = summaryDiv.querySelector('.video-title');
         if (existingTitle) {
