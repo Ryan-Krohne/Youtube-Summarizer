@@ -113,6 +113,8 @@ const button = form.querySelector('button');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    button.disabled = true;
+
     const contactTextElement = document.getElementById('contactFooter');
     if (contactTextElement && contactTextElement.style.display !== 'none') {
         contactTextElement.style.display = 'none';
@@ -258,6 +260,8 @@ form.addEventListener('submit', async (e) => {
         const contactFooter = document.getElementById('contactFooter');
         contactFooter.style.display = 'block';
     } finally {
+        button.textContent = 'Summarize Another Video';
+        button.disabled = false;
         button.textContent = 'Summarize Another Video';
     }
 });
