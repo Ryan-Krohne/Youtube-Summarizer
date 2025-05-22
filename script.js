@@ -269,8 +269,8 @@ form.addEventListener('submit', async (e) => {
         summaryDiv.appendChild(errorMessageElement);
 
         // Show the "Contact me" footer on error
-        const contactFooter = document.getElementById('contactFooter');
-        contactFooter.style.display = 'block';
+        // const contactFooter = document.getElementById('contactFooter');
+        // contactFooter.style.display = 'block';
     } finally {
         button.textContent = 'Summarize Another Video';
         button.disabled = false;
