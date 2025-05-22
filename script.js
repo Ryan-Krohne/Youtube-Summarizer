@@ -109,6 +109,8 @@ const descriptionSection = document.getElementById('descriptionSection');
 const keyPointsSection = document.getElementById('keyPointsSection');
 const container = document.getElementById('container');
 const button = form.querySelector('button');
+let lastSubmittedUrl = null;
+
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -119,7 +121,17 @@ form.addEventListener('submit', async (e) => {
     if (contactTextElement && contactTextElement.style.display !== 'none') {
         contactTextElement.style.display = 'none';
     }
-    const youtubeLink = document.getElementById('youtubeLink').value;
+    const youtubeLink = document.getElementById('youtubeLink').value.trim();
+    let bodyToSend;
+    if (youtubeLink === lastSubmittedUrl) {
+        // Modify what you send in this case — for example, add a flag or a param
+        bodyToSend = JSON.stringify({ url: youtubeLink, refresh: true });
+    } else {
+        bodyToSend = JSON.stringify({ url: youtubeLink });
+    }
+    lastSubmittedUrl = youtubeLink;
+
+
     button.textContent = 'Getting Summary...';
 
     const errorMessage = summaryDiv.querySelector('.error-message');
@@ -133,7 +145,7 @@ form.addEventListener('submit', async (e) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ url: youtubeLink }),
+            body: bodyToSend,
         });
 
         if (!response.ok) {
