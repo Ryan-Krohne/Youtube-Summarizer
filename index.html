@@ -12,7 +12,13 @@
     <link rel="manifest" href="/Youtube-Summarizer/site.webmanifest">
     <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css">
     <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
-
+    <script>
+        if (location.hostname.includes('vercel.app')) {
+            const base = document.createElement('base');
+            base.href = '/';
+            document.head.appendChild(base);
+        }
+    </script>
 </head>
 <body>
     <div class="container" id="container"> 
