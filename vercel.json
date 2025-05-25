@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+        {
+            "source": "/summary/:videoId",
+            "destination": "/"
+        }
+    ]
+}
