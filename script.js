@@ -1,3 +1,18 @@
+window.addEventListener('DOMContentLoaded', async () => {
+    const pathMatch = window.location.pathname.match(/^\/summary\/([\w-]+)/);
+    if (pathMatch) {
+        console.log("match")
+        const videoId = pathMatch[1];
+        const fullYouTubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+        document.getElementById('youtubeLink').value = fullYouTubeUrl;
+
+        lastSubmittedUrl = '';
+        form.dispatchEvent(new Event('submit'));
+    }
+});
+
+
 function applyThemeBasedOnPreference() {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark-mode');
