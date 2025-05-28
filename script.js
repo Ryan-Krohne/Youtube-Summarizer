@@ -287,26 +287,44 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
-window.addEventListener('DOMContentLoaded', () => {
-    const isGithubPages = window.location.hostname.includes('github.io');
-    const basePath = isGithubPages ? '/Youtube-Summarizer' : '';
-    const urlParams = new URLSearchParams(window.location.search);
-    const redirectPath = urlParams.get('redirect');
-  
-    if (redirectPath && redirectPath.startsWith(basePath)) {
-      const path = redirectPath.replace(basePath, '');
-      const match = path.match(/^\/summary\/([\w-]+)/);
-  
-      if (match) {
-        const videoId = match[1];
-  
-        document.getElementById('youtubeLink').value = `https://www.youtube.com/watch?v=${videoId}`;
-  
-        form.dispatchEvent(new Event('submit'));
 
+
+window.addEventListener('DOMContentLoaded', () => {
+    const path = window.location.pathname;
+    const match = path.match(/^\/summary\/([\w-]+)/);
+    if (match) {
+      const videoId = match[1];
+      document.getElementById('youtubeLink').value = `https://www.youtube.com/watch?v=${videoId}`;
   
-        window.history.replaceState({}, '', `${basePath}/summary/${videoId}`);
-      }
+      form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+  
+      window.history.replaceState({}, '', `/summary/${videoId}`);
     }
   });
+  
+
+
+
+// window.addEventListener('DOMContentLoaded', () => {
+//     const isGithubPages = window.location.hostname.includes('github.io');
+//     const basePath = isGithubPages ? '/Youtube-Summarizer' : '';
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const redirectPath = urlParams.get('redirect');
+  
+//     if (redirectPath && redirectPath.startsWith(basePath)) {
+//       const path = redirectPath.replace(basePath, '');
+//       const match = path.match(/^\/summary\/([\w-]+)/);
+  
+//       if (match) {
+//         const videoId = match[1];
+  
+//         document.getElementById('youtubeLink').value = `https://www.youtube.com/watch?v=${videoId}`;
+  
+//         form.dispatchEvent(new Event('submit'));
+
+  
+//         window.history.replaceState({}, '', `${basePath}/summary/${videoId}`);
+//       }
+//     }
+//   });
   
