@@ -207,7 +207,7 @@ form.addEventListener('submit', async (e) => {
                     const value = data.faqs[key];
 
                     faqHTML += `
-                        <div class="faq-item" style="cursor: pointer;">
+                        <div class="faq-item" style="cursor: pointer; padding-top: 10px;">
                             <div class="faq-question faq-question-element" style="display: flex; justify-content: space-between; align-items: center;">
                                 <strong>${key}</strong> <span class="dropdown-arrow">▼</span>
                             </div>
