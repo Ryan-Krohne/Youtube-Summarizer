@@ -1,13 +1,46 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8" />
-    <title>Page Not Found</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YouTube Summarizer</title>
+
     <script>
-      const basePath = '/Youtube-Summarizer';
-      const path = window.location.pathname;
-      window.location.replace(`${basePath}/?redirect=${encodeURIComponent(path)}`);
+        const isGitHubPages = window.location.pathname.includes('/Youtube-Summarizer/');
+        const baseURL = isGitHubPages ? '/Youtube-Summarizer/' : '/';
+        console.log("BaseURL:", baseURL)
+        document.write(`<base href="${baseURL}">`);
     </script>
-  </head>
-  <body></body>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css" />
+    <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+</head>
+<body>
+    <div class="container" id="container"> 
+        <h1>YouTube Summarizer</h1>
+        <form id="summarizerForm">
+            <input type="url" id="youtubeLink" placeholder="Enter a Youtube URL" required />
+            <button type="submit">Get Summary</button>
+        </form>
+        <div id="summary" class="summary">
+            <div id="descriptionSection" class="section"></div>
+            <div id="keyPointsSection" class="section"></div>
+        </div>
+    </div>
+
+    <div id="contactFooter" style="display: none; text-align: center; padding: 20px; width: 100%; position: absolute; bottom: 0; left: 0;">
+        <a href="https://www.linkedin.com/in/ryankrohne/" target="_blank" style="color: #007bff; text-decoration: underline; font-weight: bold;">
+            Something went wrong? Let me know.
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</body>
 </html>
