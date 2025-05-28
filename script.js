@@ -1,5 +1,6 @@
 const isGithubPages = window.location.hostname.includes('github.io');
 const basePath = isGithubPages ? '/Youtube-Summarizer' : '';
+console.log(basePath)
 
 window.addEventListener('DOMContentLoaded', async () => {
     const path = window.location.pathname.replace(basePath, '');
