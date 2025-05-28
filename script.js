@@ -2,21 +2,7 @@ const isGithubPages = window.location.hostname.includes('github.io');
 const basePath = isGithubPages ? '/Youtube-Summarizer' : '';
 console.log("Base Path",basePath)
 
-window.addEventListener('DOMContentLoaded', async () => {
-    const path = window.location.pathname.replace(basePath, '');
-    const pathMatch = path.match(/^\/summary\/([\w-]+)/);
 
-    if (pathMatch) {
-        console.log("match");
-        const videoId = pathMatch[1];
-        const fullYouTubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
-
-        document.getElementById('youtubeLink').value = fullYouTubeUrl;
-
-        lastSubmittedUrl = '';
-        form.dispatchEvent(new Event('submit'));
-    }
-});
 
 
 function applyThemeBasedOnPreference() {
@@ -298,3 +284,27 @@ form.addEventListener('submit', async (e) => {
         button.textContent = 'Summarize Another Video';
     }
 });
+
+window.addEventListener('DOMContentLoaded', () => {
+    const isGithubPages = window.location.hostname.includes('github.io');
+    const basePath = isGithubPages ? '/Youtube-Summarizer' : '';
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectPath = urlParams.get('redirect');
+  
+    if (redirectPath && redirectPath.startsWith(basePath)) {
+      const path = redirectPath.replace(basePath, '');
+      const match = path.match(/^\/summary\/([\w-]+)/);
+  
+      if (match) {
+        const videoId = match[1];
+  
+        document.getElementById('youtubeLink').value = `https://www.youtube.com/watch?v=${videoId}`;
+  
+        form.dispatchEvent(new Event('submit'));
+
+  
+        window.history.replaceState({}, '', `${basePath}/summary/${videoId}`);
+      }
+    }
+  });
+  
