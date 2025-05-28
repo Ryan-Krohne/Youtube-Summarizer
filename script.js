@@ -1,7 +1,12 @@
+const isGithubPages = window.location.hostname.includes('github.io');
+const basePath = isGithubPages ? '/Youtube-Summarizer' : '';
+
 window.addEventListener('DOMContentLoaded', async () => {
-    const pathMatch = window.location.pathname.match(/^\/summary\/([\w-]+)/);
+    const path = window.location.pathname.replace(basePath, '');
+    const pathMatch = path.match(/^\/summary\/([\w-]+)/);
+
     if (pathMatch) {
-        console.log("match")
+        console.log("match");
         const videoId = pathMatch[1];
         const fullYouTubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
