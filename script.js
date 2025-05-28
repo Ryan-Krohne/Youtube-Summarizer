@@ -39,6 +39,7 @@ window.toggleAnswer = function(event) {
     }
 };
 
+// Day/Night toggles
 document.addEventListener('DOMContentLoaded', () => {
     const iconContainer = document.createElement('div');
     iconContainer.classList.add('icon-container');
@@ -73,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//Intro JS stuff
 window.addEventListener('DOMContentLoaded', () => {
   const hasSeenTour = localStorage.getItem('hasSeenTour');
 
