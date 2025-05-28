@@ -288,16 +288,23 @@ form.addEventListener('submit', async (e) => {
 
 window.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
-    const match = path.match(/^\/summary\/([\w-]+)/);
+    console.log('Current path:', path);
+  
+    const match = path.match(/\/summary\/([\w-]+)(?:\/)?$/);
+  
     if (match) {
       const videoId = match[1];
-      document.getElementById('youtubeLink').value = `https://www.youtube.com/watch?v=${videoId}`;
+      const input = document.getElementById('youtubeLink');
+      if (input) input.value = `https://www.youtube.com/watch?v=${videoId}`;
   
-      form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-  
-      window.history.replaceState({}, '', `/summary/${videoId}`);
+      const form = document.querySelector('form');
+      if (form) {
+        form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+        window.history.replaceState({}, '', `/summary/${videoId}`);
+      }
     }
   });
+  
   
 
 
