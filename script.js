@@ -1,10 +1,3 @@
-const isGithubPages = window.location.hostname.includes('github.io');
-const basePath = isGithubPages ? '/Youtube-Summarizer' : '';
-console.log("Base Path",basePath)
-
-
-
-
 function applyThemeBasedOnPreference() {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark-mode');
@@ -183,6 +176,10 @@ form.addEventListener('submit', async (e) => {
         const videoId = youtubeLink.split('v=')[1]?.split('&')[0];
 
         if (videoId) {
+            const isGithubPages = window.location.hostname.includes('github.io');
+            const basePath = isGithubPages ? '/Youtube-Summarizer' : '';
+            console.log("Base Path", basePath);
+            
             const newUrl = `${basePath}/summary/${videoId}`;
             window.history.pushState({ path: newUrl }, '', newUrl);
         }
