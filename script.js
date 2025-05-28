@@ -23,12 +23,12 @@ window.toggleAnswer = function(event) {
     const dropdownArrow = questionDiv.querySelector('.dropdown-arrow');
 
     if (answerDiv && dropdownArrow) {
-        console.log("Current display style:", answerDiv.style.display);
+        //console.log("Current display style:", answerDiv.style.display);
         answerDiv.style.display = answerDiv.style.display === 'none' ? 'block' : 'none';
         dropdownArrow.textContent = answerDiv.style.display === 'none' ? '▼' : '▲';
-        console.log("New display style:", answerDiv.style.display);
+        //console.log("New display style:", answerDiv.style.display);
     } else {
-        console.log("Answer Div or Dropdown Arrow not found!");
+        //console.log("Answer Div or Dropdown Arrow not found!");
     }
 };
 
@@ -178,7 +178,7 @@ form.addEventListener('submit', async (e) => {
         if (videoId) {
             const isGithubPages = window.location.hostname.includes('github.io');
             const basePath = isGithubPages ? '/Youtube-Summarizer' : '';
-            console.log("Base Path", basePath);
+            //console.log("Base Path", basePath);
             
             const newUrl = `${basePath}/summary/${videoId}`;
             window.history.pushState({ path: newUrl }, '', newUrl);
@@ -288,7 +288,7 @@ form.addEventListener('submit', async (e) => {
 
 window.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
-    console.log('Current path:', path);
+    //console.log('Current path:', path);
   
     const match = path.match(/\/summary\/([\w-]+)(?:\/)?$/);
   
