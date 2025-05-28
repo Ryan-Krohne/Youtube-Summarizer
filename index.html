@@ -4,6 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>YouTube Summarizer</title>
+
+    <script>
+        // Determine if the current URL path contains '/Youtube-Summarizer/'
+        // This indicates it's likely on GitHub Pages. Replace 'Youtube-Summarizer'
+        // with your actual GitHub repository name if it differs.
+        const isGitHubPages = window.location.pathname.includes('/Youtube-Summarizer/');
+        const baseURL = isGitHubPages ? '/Youtube-Summarizer/' : '/';
+        console.log("BaseURL:", baseURL)
+    </script>
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
