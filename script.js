@@ -201,7 +201,7 @@ form.addEventListener('submit', async (e) => {
         // --- FAQ Section with Dropdown (Goes Above Iframe Inside Description) ---
         if (data.faqs && typeof data.faqs === 'object' && Object.keys(data.faqs).length > 0) {
             faqHTML += '<div class="faq-container" style="padding-top: 20px;">';
-            faqHTML += '<h2>Related Questions</h2>';
+            faqHTML += '<h2 style="padding-bottom:10px;">Related Questions</h2>';
             for (const key in data.faqs) {
                 if (data.faqs.hasOwnProperty(key)) {
                     const value = data.faqs[key];
