@@ -207,15 +207,16 @@ form.addEventListener('submit', async (e) => {
                     const value = data.faqs[key];
 
                     faqHTML += `
-                        <div class="faq-item" style="cursor: pointer; padding-top: 10px;">
+                        <div class="faq-item" style="cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 10px; transition: box-shadow 0.2s;">
                             <div class="faq-question faq-question-element" style="display: flex; justify-content: space-between; align-items: center;">
-                                <strong>${key}</strong> <span class="dropdown-arrow">▼</span>
+                            <strong>${key}</strong> <span class="dropdown-arrow">▼</span>
                             </div>
                             <div class="faq-answer" style="display: none; margin-top: 5px;">
-                                <p>${value}</p>
+                            <p>${value}</p>
                             </div>
                         </div>
                     `;
+
                 }
             }
             faqHTML += '</div>';
