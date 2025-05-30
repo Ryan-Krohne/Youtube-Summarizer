@@ -173,7 +173,7 @@ form.addEventListener('submit', async (e) => {
         let formattedKeyPoints = data.key_points.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         formattedKeyPoints = formattedKeyPoints.replace(/\n/g, '<br>');
 
-        const videoId = youtubeLink.split('v=')[1]?.split('&')[0];
+        const videoId = data.videoId
 
         if (videoId) {
             const isGithubPages = window.location.hostname.includes('github.io');
