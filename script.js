@@ -301,7 +301,6 @@ window.addEventListener('DOMContentLoaded', () => {
       const form = document.querySelector('form');
       if (form) {
         form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-        window.history.replaceState({}, '', `/summary/${videoId}`);
       }
     }
   });
