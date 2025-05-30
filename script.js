@@ -69,39 +69,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //Intro JS stuff
 window.addEventListener('DOMContentLoaded', () => {
-  const hasSeenTour = localStorage.getItem('hasSeenTour');
-
-  if (!hasSeenTour) {
-    introJs()
-      .setOptions({
-        steps: [
-          {
-            element: document.querySelector('#youtubeLink'),
-            intro: 'Paste the link to any YouTube video you want summarized.',
-            position: 'top'
-          },
-          {
-            element: document.querySelector('button[type="submit"]'),
-            intro: 'Click this button to fetch the summary and key points from the video.',
-            position: 'top'
-          }
-        ],
-        showProgress: true,
-        showBullets: true,
-        nextLabel: 'Next →',
-        prevLabel: '← Back',
-        doneLabel: 'Finish'
-      })
-      .oncomplete(() => {
-        localStorage.setItem('hasSeenTour', 'true');
-      })
-      .onexit(() => {
-        localStorage.setItem('hasSeenTour', 'true');
-      })
-      .start();
-  }
-});
-
+    const hasSeenTour = localStorage.getItem('hasSeenTour');
+  
+    if (!hasSeenTour) {
+      setTimeout(() => {
+        introJs()
+          .setOptions({
+            steps: [
+              {
+                element: document.querySelector('#youtubeLink'),
+                intro: 'Paste the link to any YouTube video you want summarized.',
+                position: 'top'
+              },
+              {
+                element: document.querySelector('button[type="submit"]'),
+                intro: 'Click this button to fetch the summary and key points from the video.',
+                position: 'top'
+              }
+            ],
+            showProgress: true,
+            showBullets: true,
+            nextLabel: 'Next →',
+            prevLabel: '← Back',
+            doneLabel: 'Finish',
+            scrollToElement: true
+          })
+          .oncomplete(() => {
+            localStorage.setItem('hasSeenTour', 'true');
+          })
+          .onexit(() => {
+            localStorage.setItem('hasSeenTour', 'true');
+          })
+          .start();
+      }, 500);
+    }
+  });
+  
 
 
 
