@@ -138,7 +138,7 @@ window.addEventListener('DOMContentLoaded', () => {
   
   async function fetchAndCachePopularVideos() {
     try {
-      const res = await fetch('http://127.0.0.1:5000/popular_videos');
+      const res = await fetch('https://renderbackend-xfh6.onrender.com/popular_videos');
       if (!res.ok) throw new Error('Failed to fetch popular videos');
       const data = await res.json();
       localStorage.setItem('popularVideos', JSON.stringify(data));
