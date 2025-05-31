@@ -109,6 +109,70 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
 
+  function getItemWidth() {
+    const vw = window.innerWidth;
+    if (vw >= 768) {
+      // Large screen: 4 items per row → ~22% width accounting for gaps
+      return '22%';
+    } else if (vw >= 480) {
+      // Medium screen: 2 items per row → ~46%
+      return '46%';
+    } else {
+      // Small screen: 1 item per row → 90%
+      return '90%';
+    }
+  }
+  
+  async function loadPopularVideos() {
+    const cached = localStorage.getItem('popularVideos');
+    const cacheTime = localStorage.getItem('popularVideosTimestamp');
+    const now = Date.now();
+  
+    if (cached && cacheTime && now - cacheTime < 3600000) {
+      renderPopularVideos(JSON.parse(cached));
+      fetchAndCachePopularVideos();
+    } else {
+      await fetchAndCachePopularVideos();
+    }
+  }
+  
+  async function fetchAndCachePopularVideos() {
+    try {
+      const res = await fetch('http://127.0.0.1:5000/popular_videos');
+      if (!res.ok) throw new Error('Failed to fetch popular videos');
+      const data = await res.json();
+      localStorage.setItem('popularVideos', JSON.stringify(data));
+      localStorage.setItem('popularVideosTimestamp', Date.now());
+      renderPopularVideos(data);
+    } catch (err) {
+      console.error('Failed to fetch popular videos:', err);
+    }
+  }
+  
+  function renderPopularVideos(videos) {
+    const list = document.getElementById('popular-videos-list');
+    list.innerHTML = '';
+  
+    videos.forEach(video => {
+      const li = document.createElement('li');
+      li.style.width = '180px';
+      li.style.cursor = 'pointer';
+  
+      li.innerHTML = `
+        <a href="/summary/${video.video_id}" style="text-decoration:none; color:inherit;">
+            <img src="https://img.youtube.com/vi/${video.video_id}/hqdefault.jpg" alt="${video.youtube_title}" style="width:100%; border-radius:8px;" />
+            <p style="font-size: 14px; margin: 6px 0 0;">${video.youtube_title}</p>
+        </a>
+    `;
+
+  
+      list.appendChild(li);
+    });
+  }
+  
+  window.addEventListener('DOMContentLoaded', loadPopularVideos);
+  
+
 
 const form = document.getElementById('summarizerForm');
 const summaryDiv = document.getElementById('summary');

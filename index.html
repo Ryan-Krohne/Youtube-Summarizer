@@ -22,17 +22,34 @@
     <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
 </head>
 <body>
-    <div class="container" id="container"> 
+    <div class="container" id="container">
         <h1>YouTube Summarizer</h1>
         <form id="summarizerForm">
             <input type="url" id="youtubeLink" placeholder="Enter a Youtube URL" required />
             <button type="submit">Get Summary</button>
         </form>
+
         <div id="summary" class="summary">
             <div id="descriptionSection" class="section"></div>
             <div id="keyPointsSection" class="section"></div>
         </div>
     </div>
+
+    <section id="popularVideosSection">
+        <h2 style="text-align: center;">Popular Videos</h2>
+        <ul id="popular-videos-list" style="
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  justify-content: flex-start;
+  width: 768px;
+  margin: 0 auto;
+">
+
+
+    </section>
 
     <div id="contactFooter" style="display: none; text-align: center; padding: 20px; width: 100%; position: absolute; bottom: 0; left: 0;">
         <a href="https://www.linkedin.com/in/ryankrohne/" target="_blank" style="color: #007bff; text-decoration: underline; font-weight: bold;">
