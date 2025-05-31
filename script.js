@@ -69,6 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //Intro JS stuff
 window.addEventListener('DOMContentLoaded', () => {
+    if (window.location.pathname.includes('/summary')) {
+        return;  // Skip Intro.js
+    }
     const isMobileOrTablet = window.innerWidth <= 1024;
     if (!isMobileOrTablet){
         const hasSeenTour = localStorage.getItem('hasSeenTour');
