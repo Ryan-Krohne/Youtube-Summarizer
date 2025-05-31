@@ -154,19 +154,22 @@ window.addEventListener('DOMContentLoaded', () => {
     list.innerHTML = '';
   
     videos.forEach(video => {
-      const li = document.createElement('li');
-      li.style.width = '180px';
-      li.style.cursor = 'pointer';
-  
-      li.innerHTML = `
-        <a href="/summary/${video.video_id}" style="text-decoration:none; color:inherit;">
-            <img src="https://img.youtube.com/vi/${video.video_id}/hqdefault.jpg" alt="${video.youtube_title}" style="width:100%; border-radius:8px;" />
-            <p style="font-size: 14px; margin: 6px 0 0;">${video.youtube_title}</p>
-        </a>
-    `;
+        const li = document.createElement('li');
+        li.style.width = '180px';
+        li.style.cursor = 'pointer';
 
-  
-      list.appendChild(li);
+        const prefix = window.location.href.includes("github") ? "Youtube-Summarizer/" : "";
+
+        li.innerHTML = `
+            <a href="/${prefix}summary/${video.video_id}" style="text-decoration:none; color:inherit;">
+                <img src="https://img.youtube.com/vi/${video.video_id}/hqdefault.jpg" alt="${video.youtube_title}" style="width:100%; border-radius:8px;" />
+                <p style="font-size: 14px; margin: 6px 0 0;">${video.youtube_title}</p>
+            </a>
+        `;
+
+
+
+        list.appendChild(li);
     });
   }
   
