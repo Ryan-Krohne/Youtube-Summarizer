@@ -315,6 +315,7 @@ form.addEventListener('submit', async (e) => {
             <h2>Key Points</h2>
             <p>${formattedKeyPoints}</p>
         `;
+        button.textContent = 'Summarize Another Video';
 
     } catch (error) {
 
@@ -350,10 +351,11 @@ form.addEventListener('submit', async (e) => {
         // Show the "Contact me" footer on error
         // const contactFooter = document.getElementById('contactFooter');
         // contactFooter.style.display = 'block';
+
+        button.textContent = 'Retry';
+
     } finally {
-        button.textContent = 'Summarize Another Video';
         button.disabled = false;
-        button.textContent = 'Summarize Another Video';
     }
 });
 
