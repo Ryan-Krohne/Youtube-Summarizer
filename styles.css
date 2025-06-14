@@ -204,3 +204,26 @@ body.dark-mode .introjs-overlay {
     color: #000 !important;
     /* or whatever color contrasts your tooltip background */
 }
+
+.logo-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    display: inline-block;
+    z-index: 1000;
+}
+
+.logo {
+    height: 32px;
+    /* default size for mobile */
+    width: auto;
+    display: block;
+}
+
+/* For screens wider than 768px (desktop/tablet), make the logo bigger */
+@media (min-width: 768px) {
+    .logo {
+        height: 48px;
+        /* bigger logo on larger screens */
+    }
+}
