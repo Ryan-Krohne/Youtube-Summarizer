@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>YouTube Summarizer</title>
 
-    <base href="/Youtube-Summarizer/"> 
+    <script>
+        const isGitHubPages = window.location.pathname.includes('/Youtube-Summarizer/');
+        const baseURL = isGitHubPages ? '/Youtube-Summarizer/' : '/';
+        //console.log("BaseURL:", baseURL)
+        document.write(`<base href="${baseURL}">`);
+    </script>
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
@@ -17,17 +22,38 @@
     <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
 </head>
 <body>
-    <div class="container" id="container"> 
+    <a href="/" class="logo-link">
+        <img src="android-chrome-192x192.png" alt="Home" class="logo" />
+      </a>
+      
+    <div class="container" id="container">
         <h1>YouTube Summarizer</h1>
         <form id="summarizerForm">
             <input type="url" id="youtubeLink" placeholder="Enter a Youtube URL" required />
             <button type="submit">Get Summary</button>
         </form>
+
         <div id="summary" class="summary">
             <div id="descriptionSection" class="section"></div>
             <div id="keyPointsSection" class="section"></div>
         </div>
     </div>
+
+    <section id="popularVideosSection">
+        <h2 style="text-align: center;">Popular Videos</h2>
+        <ul id="popular-videos-list" style="
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  justify-content: flex-start;
+  width: 768px;
+  margin: 0 auto;
+">
+
+
+    </section>
 
     <div id="contactFooter" style="display: none; text-align: center; padding: 20px; width: 100%; position: absolute; bottom: 0; left: 0;">
         <a href="https://www.linkedin.com/in/ryankrohne/" target="_blank" style="color: #007bff; text-decoration: underline; font-weight: bold;">
