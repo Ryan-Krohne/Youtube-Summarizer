@@ -36,13 +36,8 @@ window.toggleAnswer = function(event) {
 document.addEventListener("DOMContentLoaded", () => {
     const isGitHubPages = window.location.hostname.includes("github.io");
     const logoLink = document.querySelector(".logo-link");
-  
     if (isGitHubPages && logoLink) {
-        console.log("True");
         logoLink.href = "/Youtube-Summarizer";
-    } else {
-        console.log("False");
-    }
 });
 
   
