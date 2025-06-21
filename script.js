@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isGitHubPages && logoLink) {
         console.log("True")
       logoLink.href = "/Youtube-Summarizer";
+    }else{
+        console.log("False")
     }
   });
   
