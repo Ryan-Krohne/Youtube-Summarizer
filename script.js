@@ -32,6 +32,17 @@ window.toggleAnswer = function(event) {
     }
 };
 
+// Home button changes for github deploy
+document.addEventListener("DOMContentLoaded", () => {
+    const isGitHubPages = window.location.hostname.includes("github.io");
+    const logoLink = document.getElementById("logo-link");
+  
+    if (isGitHubPages && logoLink) {
+      logoLink.href = "/Youtube-Summarizer";
+    }
+  });
+  
+
 // Day/Night toggles
 document.addEventListener('DOMContentLoaded', () => {
     const iconContainer = document.createElement('div');
