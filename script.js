@@ -35,15 +35,16 @@ window.toggleAnswer = function(event) {
 // Home button changes for github deploy
 document.addEventListener("DOMContentLoaded", () => {
     const isGitHubPages = window.location.hostname.includes("github.io");
-    const logoLink = document.getElementsByClassName("logo-link");
+    const logoLink = document.querySelector(".logo-link");
   
     if (isGitHubPages && logoLink) {
-        console.log("True")
-      logoLink.href = "/Youtube-Summarizer";
-    }else{
-        console.log("False")
+        console.log("True");
+        logoLink.href = "/Youtube-Summarizer";
+    } else {
+        console.log("False");
     }
-  });
+});
+
   
 
 // Day/Night toggles
