@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoLink = document.querySelector(".logo-link");
     if (isGitHubPages && logoLink) {
         logoLink.href = "/Youtube-Summarizer";
+    }
 });
 
   
