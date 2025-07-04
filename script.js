@@ -328,6 +328,23 @@ form.addEventListener('submit', async (e) => {
         `;
         button.textContent = 'Summarize Another Video';
 
+        if (data.needs_logging) {
+            fetch('https://renderbackend-xfh6.onrender.com/log_summary', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    title: data.title,
+                    url: bodyToSend.url,
+                    video_id: data.video_id,
+                    description: data.description,
+                    key_points: data.key_points,
+                    faqs: data.faqs,
+                }),
+            }).catch(err => {
+                console.warn('Logging failed:', err);
+            });
+        }
+
     } catch (error) {
 
         const titleElement = summaryDiv.querySelector('.video-title');
