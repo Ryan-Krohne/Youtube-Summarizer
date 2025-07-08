@@ -331,7 +331,7 @@ form.addEventListener('submit', async (e) => {
         button.textContent = 'Summarize Another Video';
 
         if (data.needs_logging) {
-            fetch('https://renderbackend-xfh6.onrender.com/log_summary', {
+            fetch('https://renderbackend-xfh6.onrender.com/log_status', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
