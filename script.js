@@ -235,7 +235,7 @@ form.addEventListener('submit', async (e) => {
 
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.error || 'Failed to fetch the summary');
+            throw errorData;
         }
 
         const data = await response.json();
@@ -370,7 +370,7 @@ form.addEventListener('submit', async (e) => {
         // Add error message to the page
         const errorMessageElement = document.createElement('div');
         errorMessageElement.classList.add('error-message');
-        errorMessageElement.innerText = error.message;
+        errorMessageElement.innerText = error.message || 'An error occurred';
 
         // Insert the error message into summaryDiv
         summaryDiv.style.display = 'block';
