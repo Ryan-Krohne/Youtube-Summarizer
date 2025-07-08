@@ -385,9 +385,10 @@ form.addEventListener('submit', async (e) => {
         button.textContent = 'Retry';
 
     } finally {
+        console.log("Reached finally block")
         button.disabled = false;
 
-        const userUrl = bodyToSend?.url || null;
+        const userUrl = youtubeLink || null;
         const videoTitle = data?.title || 'Unknown';
         const statusCode = error ? '500' : '200';
 
