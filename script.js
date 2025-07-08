@@ -195,6 +195,8 @@ const keyPointsSection = document.getElementById('keyPointsSection');
 const container = document.getElementById('container');
 const button = form.querySelector('button');
 let lastSubmittedUrl = null;
+let data = null;
+let error = null;
 
 
 form.addEventListener('submit', async (e) => {
