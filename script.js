@@ -384,6 +384,25 @@ form.addEventListener('submit', async (e) => {
 
     } finally {
         button.disabled = false;
+
+        const userUrl = bodyToSend?.url || null;
+        const videoTitle = data?.title || 'Unknown';
+        const statusCode = error ? '500' : '200';
+
+        // Always log attempt
+        if (userUrl) {
+            fetch('https://renderbackend-xfh6.onrender.com/log_video', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    video_title: videoTitle,
+                    video_url: userUrl,
+                    status_code: statusCode,
+                }),
+            }).catch(err => {
+                console.warn('Log video call failed:', err);
+            });
+        }
     }
 });
 
