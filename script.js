@@ -332,7 +332,7 @@ form.addEventListener('submit', async (e) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     title: data.title,
-                    url: bodyToSend.url,
+                    url: youtubeLink,
                     video_id: data.video_id,
                     description: data.description,
                     key_points: data.key_points,
