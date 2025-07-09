@@ -204,10 +204,6 @@ form.addEventListener('submit', async (e) => {
 
     button.disabled = true;
 
-    const contactTextElement = document.getElementById('contactFooter');
-    if (contactTextElement && contactTextElement.style.display !== 'none') {
-        contactTextElement.style.display = 'none';
-    }
     const youtubeLink = document.getElementById('youtubeLink').value.trim();
     let bodyToSend;
     if (youtubeLink === lastSubmittedUrl) {
@@ -378,9 +374,6 @@ form.addEventListener('submit', async (e) => {
         summaryDiv.style.display = 'block';
         summaryDiv.appendChild(errorMessageElement);
 
-        // Show the "Contact me" footer on error
-        // const contactFooter = document.getElementById('contactFooter');
-        // contactFooter.style.display = 'block';
 
         button.textContent = 'Retry';
 
