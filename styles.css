@@ -227,3 +227,36 @@ body.dark-mode .introjs-overlay {
         /* bigger logo on larger screens */
     }
 }
+
+.skeleton {
+    background: #ccc;
+    border-radius: 8px;
+    animation: pulse 1.5s infinite;
+}
+
+.skeleton-thumbnail {
+    width: 180px;
+    height: 101px;
+    /* YouTube thumbnail aspect ratio ~16:9 */
+    margin-bottom: 6px;
+}
+
+.skeleton-text {
+    width: 140px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

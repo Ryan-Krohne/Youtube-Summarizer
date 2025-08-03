@@ -15,9 +15,64 @@ function applyThemeBasedOnPreference() {
 
 }
 
-applyThemeBasedOnPreference();
+window.addEventListener('DOMContentLoaded', async () => {
+    applyThemeBasedOnPreference();
+    renderSkeletons(8);
 
-window.toggleAnswer = function(event) {
+    await loadPopularVideos(); // Wait for videos to load
+
+    setTimeout(() => {
+        if (window.location.pathname.includes('/summary')) {
+            return; // Skip on summary page
+        }
+
+        const isMobileOrTablet = window.innerWidth <= 1024;
+        if (!isMobileOrTablet) {
+            const hasSeenTour = localStorage.getItem('hasSeenTour');
+            if (!hasSeenTour) {
+                introJs()
+                    .setOptions({
+                        steps: [
+                            {
+                                element: document.querySelector('#youtubeLink'),
+                                intro: 'Paste the link to any YouTube video you want summarized.',
+                                position: 'top'
+                            },
+                            {
+                                element: document.querySelector('button[type="submit"]'),
+                                intro: 'Click this button to fetch the summary and key points from the video.',
+                                position: 'top'
+                            }
+                        ],
+                        showProgress: true,
+                        showBullets: true,
+                        nextLabel: 'Next →',
+                        prevLabel: '← Back',
+                        doneLabel: 'Finish'
+                    })
+                    .oncomplete(() => {
+                        localStorage.setItem('hasSeenTour', 'true');
+                    })
+                    .onexit(() => {
+                        localStorage.setItem('hasSeenTour', 'true');
+                    })
+                    .start();
+            }
+        }
+    }, 250); // Adjust delay as you want
+});
+
+
+// Home button changes for github deploy
+document.addEventListener("DOMContentLoaded", () => {
+    const isGitHubPages = window.location.hostname.includes("github.io");
+    const logoLink = document.querySelector(".logo-link");
+    if (isGitHubPages && logoLink) {
+        logoLink.href = "/Youtube-Summarizer";
+    }
+});
+
+window.toggleAnswer = function (event) {
     const questionDiv = event.currentTarget;
     const answerDiv = questionDiv.nextElementSibling;
     const dropdownArrow = questionDiv.querySelector('.dropdown-arrow');
@@ -32,16 +87,6 @@ window.toggleAnswer = function(event) {
     }
 };
 
-// Home button changes for github deploy
-document.addEventListener("DOMContentLoaded", () => {
-    const isGitHubPages = window.location.hostname.includes("github.io");
-    const logoLink = document.querySelector(".logo-link");
-    if (isGitHubPages && logoLink) {
-        logoLink.href = "/Youtube-Summarizer";
-    }
-});
-
-  
 
 // Day/Night toggles
 document.addEventListener('DOMContentLoaded', () => {
@@ -78,92 +123,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-//Intro JS stuff
-window.addEventListener('DOMContentLoaded', () => {
-    if (window.location.pathname.includes('/summary')) {
-        return;  // Skip Intro.js
-    }
-    const isMobileOrTablet = window.innerWidth <= 1024;
-    if (!isMobileOrTablet){
-        const hasSeenTour = localStorage.getItem('hasSeenTour');
-        if (!hasSeenTour) {
-            introJs()
-              .setOptions({
-                steps: [
-                  {
-                    element: document.querySelector('#youtubeLink'),
-                    intro: 'Paste the link to any YouTube video you want summarized.',
-                    position: 'top'
-                  },
-                  {
-                    element: document.querySelector('button[type="submit"]'),
-                    intro: 'Click this button to fetch the summary and key points from the video.',
-                    position: 'top'
-                  }
-                ],
-                showProgress: true,
-                showBullets: true,
-                nextLabel: 'Next →',
-                prevLabel: '← Back',
-                doneLabel: 'Finish'
-              })
-              .oncomplete(() => {
-                localStorage.setItem('hasSeenTour', 'true');
-              })
-              .onexit(() => {
-                localStorage.setItem('hasSeenTour', 'true');
-              })
-              .start();
-          }
-
-    }
-  });
 
 
-  function getItemWidth() {
-    const vw = window.innerWidth;
-    if (vw >= 768) {
-      // Large screen: 4 items per row → ~22% width accounting for gaps
-      return '22%';
-    } else if (vw >= 480) {
-      // Medium screen: 2 items per row → ~46%
-      return '46%';
-    } else {
-      // Small screen: 1 item per row → 90%
-      return '90%';
-    }
-  }
-  
-  async function loadPopularVideos() {
+
+async function loadPopularVideos() {
     const cached = localStorage.getItem('popularVideos');
     const cacheTime = localStorage.getItem('popularVideosTimestamp');
     const now = Date.now();
-  
+
     if (cached && cacheTime && now - cacheTime < 3600000) {
-      renderPopularVideos(JSON.parse(cached));
-      fetchAndCachePopularVideos();
+        renderPopularVideos(JSON.parse(cached));
+        fetchAndCachePopularVideos();
     } else {
-      await fetchAndCachePopularVideos();
+        await fetchAndCachePopularVideos();
     }
-  }
-  
-  async function fetchAndCachePopularVideos() {
+}
+
+async function fetchAndCachePopularVideos() {
     try {
-      const res = await fetch('https://renderbackend-xfh6.onrender.com/popular_videos');
-      if (!res.ok) throw new Error('Failed to fetch popular videos');
-      const data = await res.json();
-      localStorage.setItem('popularVideos', JSON.stringify(data));
-      localStorage.setItem('popularVideosTimestamp', Date.now());
-      renderPopularVideos(data);
+        const res = await fetch('https://renderbackend-xfh6.onrender.com/popular_videos');
+        if (!res.ok) throw new Error('Failed to fetch popular videos');
+        const data = await res.json();
+        localStorage.setItem('popularVideos', JSON.stringify(data));
+        localStorage.setItem('popularVideosTimestamp', Date.now());
+        renderPopularVideos(data);
     } catch (err) {
-      console.error('Failed to fetch popular videos:', err);
+        console.error('Failed to fetch popular videos:', err);
     }
-  }
-  
-  function renderPopularVideos(videos) {
+}
+
+function renderPopularVideos(videos) {
     const list = document.getElementById('popular-videos-list');
     list.innerHTML = '';
-  
+
     videos.forEach(video => {
         const li = document.createElement('li');
         li.style.width = '180px';
@@ -182,10 +174,30 @@ window.addEventListener('DOMContentLoaded', () => {
 
         list.appendChild(li);
     });
-  }
-  
-  window.addEventListener('DOMContentLoaded', loadPopularVideos);
-  
+}
+
+function renderSkeletons(count = 5) {
+    const list = document.getElementById('popular-videos-list');
+    list.innerHTML = '';
+
+    for (let i = 0; i < count; i++) {
+        const li = document.createElement('li');
+        li.style.width = '180px';
+
+        li.innerHTML = `
+      <div class="skeleton skeleton-thumbnail"></div>
+      <div class="skeleton skeleton-text"></div>
+    `;
+
+        list.appendChild(li);
+    }
+}
+
+
+
+
+
+
 
 
 const form = document.getElementById('summarizerForm');
@@ -264,12 +276,12 @@ form.addEventListener('submit', async (e) => {
             const isGithubPages = window.location.hostname.includes('github.io');
             const basePath = isGithubPages ? '/Youtube-Summarizer' : '';
             //console.log("Base Path", basePath);
-            
+
             const newUrl = `${basePath}/summary/${videoId}`;
             window.history.pushState({ path: newUrl }, '', newUrl);
         }
-        
-        
+
+
         const existingTitle = summaryDiv.querySelector('.video-title');
         if (existingTitle) {
             existingTitle.remove();
@@ -350,7 +362,7 @@ form.addEventListener('submit', async (e) => {
     } catch (err) {
 
         error = err;
-        jsonErrorMessage = err.error || null; 
+        jsonErrorMessage = err.error || null;
         const titleElement = summaryDiv.querySelector('.video-title');
         if (titleElement) {
             titleElement.textContent = '';
@@ -365,7 +377,7 @@ form.addEventListener('submit', async (e) => {
         if (keyPointsElement) {
             keyPointsElement.innerHTML = '';
         }
-        
+
         const faqElement = document.getElementById('faqSection');
         if (faqElement) {
             faqElement.innerHTML = '';  // Clear faq content
@@ -413,17 +425,17 @@ form.addEventListener('submit', async (e) => {
 window.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
     //console.log('Current path:', path);
-  
+
     const match = path.match(/\/summary\/([\w-]+)(?:\/)?$/);
-  
+
     if (match) {
-      const videoId = match[1];
-      const input = document.getElementById('youtubeLink');
-      if (input) input.value = `https://www.youtube.com/watch?v=${videoId}`;
-  
-      const form = document.querySelector('form');
-      if (form) {
-        form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-      }
+        const videoId = match[1];
+        const input = document.getElementById('youtubeLink');
+        if (input) input.value = `https://www.youtube.com/watch?v=${videoId}`;
+
+        const form = document.querySelector('form');
+        if (form) {
+            form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+        }
     }
-  });
+});
