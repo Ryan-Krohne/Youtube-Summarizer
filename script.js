@@ -359,6 +359,16 @@ form.addEventListener('submit', async (e) => {
             });
         }
 
+        fetch('https://renderbackend-xfh6.onrender.com/increment_count', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                video_id: data.video_id,
+            }),
+        }).catch(err => {
+            console.warn('Increment failed:', err);
+        });
+
     } catch (err) {
 
         error = err;
