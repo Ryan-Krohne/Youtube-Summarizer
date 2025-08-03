@@ -195,12 +195,16 @@ const keyPointsSection = document.getElementById('keyPointsSection');
 const container = document.getElementById('container');
 const button = form.querySelector('button');
 let lastSubmittedUrl = null;
-let data = null;
-let error = null;
+
+
 
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    let data = null;
+    let error = null;
+    let jsonErrorMessage = null;
 
     button.disabled = true;
 
@@ -236,7 +240,7 @@ form.addEventListener('submit', async (e) => {
             throw errorData;
         }
 
-        const data = await response.json();
+        data = await response.json();
 
         container.style.width = '100%';
         container.style.maxWidth = "800px";
@@ -343,8 +347,10 @@ form.addEventListener('submit', async (e) => {
             });
         }
 
-    } catch (error) {
+    } catch (err) {
 
+        error = err;
+        jsonErrorMessage = err.error || null; 
         const titleElement = summaryDiv.querySelector('.video-title');
         if (titleElement) {
             titleElement.textContent = '';
@@ -383,7 +389,7 @@ form.addEventListener('submit', async (e) => {
 
         const userUrl = youtubeLink || null;
         const videoTitle = data?.title || 'Unknown';
-        const statusCode = error ? '500' : '200';
+        const statusCode = error ? `500: ${jsonErrorMessage}` : '200';
 
         // Always log attempt
         if (userUrl) {
