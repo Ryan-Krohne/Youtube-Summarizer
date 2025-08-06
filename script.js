@@ -289,6 +289,7 @@ form.addEventListener('submit', async (e) => {
 
         const titleElement = document.createElement('h2');
         titleElement.textContent = data.title;
+        document.title = `${data.title} - YouTube Summarizer`;
         titleElement.classList.add('video-title');
         summaryDiv.insertBefore(titleElement, summaryDiv.firstChild);
 
@@ -373,6 +374,9 @@ form.addEventListener('submit', async (e) => {
 
         error = err;
         jsonErrorMessage = err.error || null;
+
+        document.title = 'Summarize Failed - YouTube Summarizer';
+
         const titleElement = summaryDiv.querySelector('.video-title');
         if (titleElement) {
             titleElement.textContent = '';
