@@ -259,8 +259,46 @@ function renderSkeletons(count = 5) {
 
 
 
+async function fetchSummaryWithRetry(bodyToSend, maxRetries = 3) {
+    let attempt = 0;
 
+    while (attempt < maxRetries) {
+        try {
+            const response = await fetch('https://renderbackend-xfh6.onrender.com/summarize', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: bodyToSend,
+            });
 
+            const data = await response.json();
+
+            if (!response.ok) {
+                // Only retry for the exact 500 NoneType error
+                if (response.status === 500 && data.error === "SSL error: decryption failed or bad record mac") {
+                    console.warn(`Retrying due to backend 500 NoneType error... attempt ${attempt + 1}`);
+                    attempt++;
+                    continue; // retry
+                } else {
+                    // Any other error: stop retrying
+                    throw data;
+                }
+            }
+
+            // Success
+            return data;
+
+        } catch (err) {
+            // If it’s not the specific 500 NoneType error, throw immediately
+            if (err.error !== "cannot unpack non-iterable NoneType object") {
+                throw err;
+            }
+
+            // Only increment attempt if it’s the 500 NoneType error
+            attempt++;
+            if (attempt >= maxRetries) throw err;
+        }
+    }
+}
 
 
 
@@ -303,20 +341,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch('https://renderbackend-xfh6.onrender.com/summarize', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: bodyToSend,
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw errorData;
-        }
-
-        data = await response.json();
+        data = await fetchSummaryWithRetry(bodyToSend);
 
         container.style.width = '100%';
         container.style.maxWidth = "800px";
