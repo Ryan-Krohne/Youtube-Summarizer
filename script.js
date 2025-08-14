@@ -221,15 +221,24 @@ function renderPopularVideos(videos) {
         li.innerHTML = `
             <a href="/${prefix}summary/${video.video_id}" style="text-decoration:none; color:inherit;">
                 <img src="https://img.youtube.com/vi/${video.video_id}/hqdefault.jpg" alt="${video.youtube_title}" style="width:100%; border-radius:8px;" />
-                <p style="font-size: 14px; margin: 6px 0 0;">${video.youtube_title}</p>
+                <p style="
+                    font-size: 14px;
+                    margin: 6px 0 0;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                ">
+                    ${video.youtube_title}
+                </p>
             </a>
         `;
-
-
 
         list.appendChild(li);
     });
 }
+
 
 function renderSkeletons(count = 5) {
     const list = document.getElementById('popular-videos-list');
