@@ -239,7 +239,19 @@ function renderPopularVideos(videos) {
     });
 }
 
+document.addEventListener('keydown', function (event) {
+    const input = document.getElementById('youtubeLink');
 
+    // Only trigger if '/' is pressed without Ctrl, Alt, or Meta
+    // and the user is not already typing in the input
+    if (event.key === '/' && !event.ctrlKey && !event.altKey && !event.metaKey) {
+        if (document.activeElement !== input) {
+            event.preventDefault(); // Prevent default browser find behavior
+            input.focus();
+            input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+});
 function renderSkeletons(count = 5) {
     const list = document.getElementById('popular-videos-list');
     list.innerHTML = '';
