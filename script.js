@@ -331,6 +331,7 @@ form.addEventListener('submit', async (e) => {
     let data = null;
     let error = null;
     let jsonErrorMessage = null;
+    let video_title = null;
 
     button.disabled = true;
 
@@ -475,6 +476,7 @@ form.addEventListener('submit', async (e) => {
 
         error = err;
         jsonErrorMessage = err.error || null;
+        video_title = error.title || Unknown;
 
         document.title = 'Summarize Failed - YouTube Summarizer';
 
@@ -515,7 +517,7 @@ form.addEventListener('submit', async (e) => {
         button.disabled = false;
 
         const userUrl = youtubeLink || null;
-        const videoTitle = data?.title || 'Unknown';
+        const videoTitle = data?.title || video_title || 'Unknown';
         const statusCode = error ? `500: ${jsonErrorMessage}` : '200';
 
         // Always log attempt
