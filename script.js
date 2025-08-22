@@ -276,7 +276,7 @@ async function fetchSummaryWithRetry(bodyToSend, maxRetries = 3) {
 
     while (attempt < maxRetries) {
         try {
-            const response = await fetch('https://renderbackend-xfh6.onrender.com/summarize', {
+            const response = await fetch('http://127.0.0.1:5000/summarize', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: bodyToSend,
@@ -332,7 +332,7 @@ form.addEventListener('submit', async (e) => {
 
     let data = null;
     let error = null;
-    let jsonErrorMessage = null;
+    let jsonErrorMessageUSEDFORLOGS = null;
     let video_title = null;
 
     button.disabled = true;
@@ -475,10 +475,11 @@ form.addEventListener('submit', async (e) => {
         });
 
     } catch (err) {
-
         error = err;
-        jsonErrorMessage = err.error || null;
-        video_title = error.title || Unknown;
+
+        // Fix this to use the actual properties set in your fetch function
+        jsonErrorMessageUSEDFORLOGS = err.data?.error || err.data?.message || 'Unknown error';
+        video_title = err.data?.title || 'Unknown';
 
         document.title = 'Summarize Failed - YouTube Summarizer';
 
@@ -499,28 +500,26 @@ form.addEventListener('submit', async (e) => {
 
         const faqElement = document.getElementById('faqSection');
         if (faqElement) {
-            faqElement.innerHTML = '';  // Clear faq content
+            faqElement.innerHTML = '';
         }
 
         // Add error message to the page
         const errorMessageElement = document.createElement('div');
         errorMessageElement.classList.add('error-message');
-        errorMessageElement.innerText = error.message || 'An error occurred';
+        errorMessageElement.innerText = error.data?.message || "An error has occured :(";
 
-        // Insert the error message into summaryDiv
         summaryDiv.style.display = 'block';
         summaryDiv.appendChild(errorMessageElement);
 
-
         button.textContent = 'Retry';
-
-    } finally {
+    }
+finally {
         console.log("Reached finally block")
         button.disabled = false;
 
         const userUrl = youtubeLink || null;
         const videoTitle = data?.title || video_title || 'Unknown';
-        const statusCode = error ? `500: ${jsonErrorMessage}` : '200';
+        const statusCode = error ? `500: ${jsonErrorMessageUSEDFORLOGS}` : '200';
 
         // Always log attempt
         if (userUrl) {
