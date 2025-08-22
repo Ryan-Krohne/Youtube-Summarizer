@@ -291,8 +291,10 @@ async function fetchSummaryWithRetry(bodyToSend, maxRetries = 3) {
                     attempt++;
                     continue; // retry
                 } else {
-                    // Any other error: stop retrying
-                    throw data;
+                    const error = new Error(data.error || 'Unknown error from server');
+                    error.status = response.status;
+                    error.data = data;
+                    throw error;
                 }
             }
 
