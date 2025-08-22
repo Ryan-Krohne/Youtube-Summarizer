@@ -276,7 +276,7 @@ async function fetchSummaryWithRetry(bodyToSend, maxRetries = 3) {
 
     while (attempt < maxRetries) {
         try {
-            const response = await fetch('http://127.0.0.1:5000/summarize', {
+            const response = await fetch('https://renderbackend-xfh6.onrender.com/summarize', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: bodyToSend,
